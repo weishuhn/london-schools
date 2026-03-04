@@ -5,13 +5,7 @@ import json
 from pathlib import Path
 
 DATA_DIR = Path("data")
-PROPERTIES_DIR = DATA_DIR / "properties"
 OUTPUT = DATA_DIR / "london_schools.html"
-
-
-def safe_filename(name):
-    """Match the convention used by 04_rightmove_search.py."""
-    return name.replace("/", "_").replace(" ", "_").replace("\u2019", "")
 
 
 def load_json(path):
@@ -38,25 +32,6 @@ def main():
         s["neighbourhood_avg_gcse"] = c.get("neighbourhood_avg_gcse")
         s["neighbourhood_school_count"] = c.get("neighbourhood_school_count")
         s["rightmove_url"] = c.get("rightmove_url")
-
-    # Load properties per school
-    properties_by_school = {}
-    total_props = 0
-    for s in schools:
-        fname = safe_filename(s["name"]) + ".json"
-        pfile = PROPERTIES_DIR / fname
-        if pfile.exists():
-            raw = load_json(pfile)
-            # Support both old (list) and new (dict with rightmove_url) formats
-            if isinstance(raw, dict):
-                props = raw.get("properties", [])
-            else:
-                props = raw
-            properties_by_school[s["name"]] = props
-            total_props += len(props)
-        else:
-            properties_by_school[s["name"]] = []
-            print(f"  Warning: no property file for {s['name']} ({fname})")
 
     # Borough name mapping (our data -> GeoJSON names)
     borough_map = {
@@ -88,22 +63,21 @@ def main():
     lines_file = DATA_DIR / "london_lines.json"
     lines_geojson = load_json(lines_file) if lines_file.exists() else {"type": "FeatureCollection", "features": []}
 
-    print(f"Loaded {len(schools)} schools, {len(neighbourhoods)} neighbourhoods, {total_props} properties, {len(stations)} stations, {len(lines_geojson.get('features', []))} transport lines")
+    print(f"Loaded {len(schools)} schools, {len(neighbourhoods)} neighbourhoods, {len(stations)} stations, {len(lines_geojson.get('features', []))} transport lines")
 
     # --- Build HTML ---
     schools_json = json.dumps(schools, ensure_ascii=False)
     neighbourhoods_json = json.dumps(neighbourhoods, ensure_ascii=False)
-    properties_json = json.dumps(properties_by_school, ensure_ascii=False)
     borough_map_json = json.dumps(borough_map, ensure_ascii=False)
     stations_json = json.dumps(stations, ensure_ascii=False)
     lines_json = json.dumps(lines_geojson, ensure_ascii=False)
 
-    html = build_html(schools_json, neighbourhoods_json, properties_json, borough_map_json, stations_json, lines_json)
+    html = build_html(schools_json, neighbourhoods_json, borough_map_json, stations_json, lines_json)
     OUTPUT.write_text(html, encoding="utf-8")
     print(f"Written to {OUTPUT} ({len(html):,} bytes)")
 
 
-def build_html(schools_json, neighbourhoods_json, properties_json, borough_map_json, stations_json, lines_json):
+def build_html(schools_json, neighbourhoods_json, borough_map_json, stations_json, lines_json):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -263,6 +237,15 @@ body {{ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ub
         <option value="Detached">Detached</option>
         <option value="End of Terrace">End of Terrace</option>
       </select>
+      <label for="sort-by">Sort By</label>
+      <select id="sort-by">
+        <option value="distance">Distance (nearest)</option>
+        <option value="price-asc">Price (low to high)</option>
+        <option value="price-desc">Price (high to low)</option>
+        <option value="date-desc">Date listed (newest)</option>
+        <option value="date-asc">Date listed (oldest)</option>
+        <option value="beds-desc">Bedrooms (most)</option>
+      </select>
       <div class="result-count" id="result-count"></div>
     </div>
   </div>
@@ -275,10 +258,102 @@ body {{ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ub
 <script>
 const SCHOOLS = {schools_json};
 const NEIGHBOURHOODS = {neighbourhoods_json};
-const PROPERTIES = {properties_json};
 const BOROUGH_MAP = {borough_map_json};
 const STATIONS = {stations_json};
 const LINES = {lines_json};
+
+const RM_CONFIG = {{ radius:'0.5', minBedrooms:4, minPrice:750000, maxPrice:3000000, maxResults:96 }};
+const propertiesCache = {{}};
+
+function slimProperty(p) {{
+  const priceObj = p.price || {{}};
+  const displayPrices = priceObj.displayPrices || [];
+  const propImages = p.propertyImages || {{}};
+  let imageUrl = propImages.mainImageSrc;
+  if (!imageUrl) {{
+    const imgs = propImages.images || p.images || [];
+    if (imgs.length) imageUrl = imgs[0].srcUrl;
+  }}
+  const loc = p.location || {{}};
+  return {{
+    id: p.id,
+    price: priceObj.amount,
+    price_display: displayPrices.length ? displayPrices[0].displayPrice : null,
+    address: p.displayAddress,
+    property_type: p.propertySubType,
+    bedrooms: p.bedrooms,
+    bathrooms: p.bathrooms,
+    summary: p.summary,
+    image_url: imageUrl,
+    url: p.id ? 'https://www.rightmove.co.uk/properties/' + p.id : null,
+    latitude: loc.latitude,
+    longitude: loc.longitude,
+    firstVisibleDate: p.firstVisibleDate || p.listingUpdate?.listingUpdateDate || null,
+  }};
+}}
+
+async function fetchPropertiesAtRadius(locationIdentifier, searchLocation, radius) {{
+  const allProps = [];
+  const seen = new Set();
+  const maxResults = RM_CONFIG.maxResults;
+
+  for (let index = 0; index < maxResults; index += 24) {{
+    const params = new URLSearchParams({{
+      searchLocation,
+      useLocationIdentifier: 'true',
+      locationIdentifier,
+      radius: String(radius),
+      _includeSSTC: 'true',
+      index: String(index),
+      sortType: '6',
+      channel: 'BUY',
+      minBedrooms: String(RM_CONFIG.minBedrooms),
+      minPrice: String(RM_CONFIG.minPrice),
+      maxPrice: String(RM_CONFIG.maxPrice),
+    }});
+    const apiUrl = 'https://www.rightmove.co.uk/api/property-search/listing/search?' + params.toString();
+    const proxyUrl = 'https://corsproxy.io/?' + encodeURIComponent(apiUrl);
+
+    const resp = await fetch(proxyUrl);
+    if (!resp.ok) throw new Error('Rightmove API error: ' + resp.status);
+    const data = await resp.json();
+    const props = data.properties || [];
+    if (props.length === 0) break;
+
+    for (const p of props) {{
+      if (p.id && seen.has(p.id)) continue;
+      if (p.id) seen.add(p.id);
+      allProps.push(slimProperty(p));
+      if (allProps.length >= maxResults) break;
+    }}
+    if (allProps.length >= maxResults) break;
+  }}
+  return allProps;
+}}
+
+async function fetchProperties(school) {{
+  if (propertiesCache[school.name]) return propertiesCache[school.name];
+  if (!school.rightmove_url) return [];
+
+  const rmParams = new URLSearchParams(new URL(school.rightmove_url).search);
+  const locationIdentifier = rmParams.get('locationIdentifier');
+  const searchLocation = rmParams.get('searchLocation') || school.postcode;
+  if (!locationIdentifier) return [];
+
+  const minResults = 50;
+  const maxRadius = 40;
+  let radius = parseFloat(RM_CONFIG.radius);
+  let allProps = [];
+
+  while (allProps.length < minResults && radius <= maxRadius) {{
+    allProps = await fetchPropertiesAtRadius(locationIdentifier, searchLocation, radius);
+    if (allProps.length >= minResults) break;
+    radius += 0.25;
+  }}
+
+  propertiesCache[school.name] = allProps;
+  return allProps;
+}}
 
 const MODE_COLORS = {{
   'tube': '#000000',
@@ -393,7 +468,7 @@ function initTabs() {{
       document.querySelectorAll('.tab-page').forEach(p => p.classList.remove('active'));
       btn.classList.add('active');
       document.getElementById(btn.dataset.tab).classList.add('active');
-      setTimeout(() => {{
+      setTimeout(async () => {{
         if (mainMap) mainMap.invalidateSize();
         if (propsMap) propsMap.invalidateSize();
         if (btn.dataset.tab === 'page-properties') {{
@@ -404,7 +479,7 @@ function initTabs() {{
             const select = document.getElementById('school-select');
             if (select.options.length > 0) {{
               select.selectedIndex = 0;
-              renderSchoolProperties(select.value);
+              await renderSchoolProperties(select.value);
             }}
           }}
         }}
@@ -575,7 +650,10 @@ function initPropsPage() {{
     select.appendChild(opt);
   }});
 
-  select.addEventListener('change', () => renderSchoolProperties(select.value));
+  select.addEventListener('change', () => {{
+    window.location.hash = encodeURIComponent(select.value);
+    renderSchoolProperties(select.value);
+  }});
 
   // Mobile filter toggle
   document.getElementById('mobile-filter-toggle').addEventListener('click', function() {{
@@ -586,9 +664,9 @@ function initPropsPage() {{
   }});
 
   // Filter listeners
-  ['filter-min-price','filter-max-price','filter-beds','filter-type'].forEach(id => {{
+  ['filter-min-price','filter-max-price','filter-beds','filter-type','sort-by'].forEach(id => {{
     document.getElementById(id).addEventListener('change', () => {{
-      if (currentSchool) renderSchoolProperties(currentSchool);
+      if (currentSchool) {{ renderSchoolProperties(currentSchool); }}
     }});
   }});
 
@@ -617,9 +695,9 @@ function switchToProperties(name) {{
   document.getElementById('school-select').value = name;
   window.location.hash = encodeURIComponent(name);
   // Delay render to let tab become visible and map init
-  setTimeout(() => {{
+  setTimeout(async () => {{
     if (!propsMap) initPropsMap();
-    renderSchoolProperties(name);
+    await renderSchoolProperties(name);
   }}, 100);
 }}
 
@@ -637,7 +715,7 @@ function applyPropertyFilters(props) {{
   }});
 }}
 
-function renderSchoolProperties(name) {{
+async function renderSchoolProperties(name) {{
   currentSchool = name;
   const school = SCHOOLS.find(s => s.name === name);
   if (!school) return;
@@ -656,17 +734,36 @@ function renderSchoolProperties(name) {{
     <div class="stat"><span class="stat-label">A-level A*-B</span><span class="stat-value">${{school.alevel_pct_a_star_b}}%</span></div>
     <div class="stat"><span class="stat-label">Type</span><span class="stat-value">${{school.type}}</span></div>
     <div class="stat"><span class="stat-label">Gender</span><span class="stat-value">${{school.gender}}</span></div>
-    <div class="stat"><span class="stat-label">Properties</span><span class="stat-value">${{school.property_count || 0}}</span></div>
     ${{school.rightmove_url ? '<a href="' + school.rightmove_url + '" target="_blank" rel="noopener" style="display:block;margin-top:8px;text-align:center;color:#38bdf8;font-size:13px;">View all on Rightmove &rarr;</a>' : ''}}
   </div>`;
 
+  // Show loading state
+  document.getElementById('result-count').textContent = 'Fetching from Rightmove...';
+  document.getElementById('props-list').innerHTML = '<div class="no-results">Fetching from Rightmove...</div>';
+
+  let rawProps;
+  try {{
+    rawProps = await fetchProperties(school);
+  }} catch (err) {{
+    console.error('Failed to fetch properties:', err);
+    document.getElementById('result-count').textContent = 'Error fetching properties';
+    document.getElementById('props-list').innerHTML = '<div class="no-results">Failed to load properties. ' + err.message + '</div>';
+    return;
+  }}
+
   // Get and filter properties
-  let props = (PROPERTIES[name] || []).map(p => ({{
+  let props = rawProps.map(p => ({{
     ...p,
     distance: haversineMiles(school.lat, school.lon, p.latitude, p.longitude)
   }}));
   props = applyPropertyFilters(props);
-  props.sort((a, b) => a.distance - b.distance);
+  const sortBy = document.getElementById('sort-by').value;
+  if (sortBy === 'price-asc') props.sort((a, b) => (a.price || 0) - (b.price || 0));
+  else if (sortBy === 'price-desc') props.sort((a, b) => (b.price || 0) - (a.price || 0));
+  else if (sortBy === 'date-desc') props.sort((a, b) => (b.firstVisibleDate || '').localeCompare(a.firstVisibleDate || ''));
+  else if (sortBy === 'date-asc') props.sort((a, b) => (a.firstVisibleDate || '').localeCompare(b.firstVisibleDate || ''));
+  else if (sortBy === 'beds-desc') props.sort((a, b) => (b.bedrooms || 0) - (a.bedrooms || 0));
+  else props.sort((a, b) => a.distance - b.distance);
 
   document.getElementById('result-count').textContent = `${{props.length}} properties found`;
 
@@ -684,13 +781,15 @@ function renderSchoolProperties(name) {{
   propsMarkers.push(schoolMarker);
 
   const bounds = L.latLngBounds([[school.lat, school.lon]]);
-  props.forEach(p => {{
+  const propMarkersByIdx = [];
+  props.forEach((p, idx) => {{
     const m = L.circleMarker([p.latitude, p.longitude], {{
       radius: 6, fillColor: '#2563eb', color: '#fff', weight: 1.5, fillOpacity: 0.8
     }}).addTo(propsMap);
     const popupImg = p.image_url ? `<img src="${{p.image_url}}" style="width:100%;max-width:200px;border-radius:4px;margin-bottom:6px;" loading="lazy">` : '';
     m.bindPopup(`${{popupImg}}<b>${{p.price_display}}</b><br>${{p.address.replace(/\\n/g, ', ')}}<br>${{p.bedrooms}} bed &bull; ${{p.property_type}}<br><a href="${{p.url}}" target="_blank" rel="noopener" style="color:#38bdf8;">View on Rightmove &rarr;</a>`);
     propsMarkers.push(m);
+    propMarkersByIdx[idx] = m;
     bounds.extend([p.latitude, p.longitude]);
   }});
 
@@ -754,8 +853,8 @@ function renderSchoolProperties(name) {{
     return;
   }}
 
-  list.innerHTML = props.map(p => `
-    <div class="prop-card">
+  list.innerHTML = props.map((p, idx) => `
+    <div class="prop-card" data-idx="${{idx}}">
       ${{p.image_url ? '<img class="prop-thumb" src="' + p.image_url + '" loading="lazy" alt="">' : ''}}
       <div class="prop-body">
         <span class="prop-price">${{p.price_display}}</span>
@@ -765,6 +864,7 @@ function renderSchoolProperties(name) {{
           <span>${{p.bedrooms}} bed</span>
           <span>${{p.bathrooms}} bath</span>
           <span>${{p.property_type}}</span>
+          ${{p.firstVisibleDate ? '<span>Listed ' + new Date(p.firstVisibleDate).toLocaleDateString('en-GB', {{day:'numeric',month:'short',year:'numeric'}}) + '</span>' : ''}}
         </div>
         ${{p.summary ? '<div class="prop-summary">' + p.summary.slice(0, 150) + (p.summary.length > 150 ? '...' : '') + '</div>' : ''}}
         <a class="prop-link" href="${{p.url}}" target="_blank" rel="noopener">View on Rightmove &rarr;</a>
@@ -772,6 +872,18 @@ function renderSchoolProperties(name) {{
     </div>
   `).join('');
   list.scrollTop = 0;
+
+  // Hover on card → highlight marker and open popup
+  list.querySelectorAll('.prop-card[data-idx]').forEach(card => {{
+    card.addEventListener('mouseenter', () => {{
+      const m = propMarkersByIdx[parseInt(card.dataset.idx)];
+      if (m) {{ m.setStyle({{ radius: 10, fillColor: '#f59e0b' }}); m.openPopup(); }}
+    }});
+    card.addEventListener('mouseleave', () => {{
+      const m = propMarkersByIdx[parseInt(card.dataset.idx)];
+      if (m) {{ m.setStyle({{ radius: 6, fillColor: '#2563eb' }}); m.closePopup(); }}
+    }});
+  }});
 }}
 
 // --- Init ---

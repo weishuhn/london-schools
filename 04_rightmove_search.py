@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Search Rightmove for properties near each London school using Scrapfly.
+"""Search Rightmove for properties near each London school using Playwright.
 
-Strategy: resolve postcode districts to Rightmove OUTCODE identifiers via the
+Strategy: resolve full postcodes to Rightmove POSTCODE identifiers via the
 house-prices page, then use the JSON listing API for property search.
 """
 
@@ -11,12 +11,11 @@ import re
 import sys
 from urllib.parse import urlencode
 
-from scrapfly import ScrapeConfig, ScrapflyClient
+from playwright.async_api import async_playwright
 
 from config import (
     GEOCODED_FILE,
     PROPERTIES_DIR,
-    SCRAPFLY_KEY,
     SEARCH_RADIUS_MILES,
     MAX_PROPERTIES_PER_SCHOOL,
     MIN_BEDROOMS,
@@ -25,18 +24,13 @@ from config import (
     MAX_PRICE,
 )
 
-if not SCRAPFLY_KEY:
-    print("Error: SCRAPFLY_KEY not set in config.py.")
-    sys.exit(1)
-
-SCRAPFLY = ScrapflyClient(key=SCRAPFLY_KEY)
-BASE_CONFIG = {"asp": True, "country": "GB"}
-
 RADIUS_MAP = {0.25: "0.25", 0.5: "0.5", 1.0: "1.0", 2.0: "2.0"}
 RM_RADIUS = RADIUS_MAP.get(SEARCH_RADIUS_MILES, "0.5")
 
-# Cache: postcode_district → OUTCODE identifier
-_outcode_cache = {}
+# Cache: postcode → POSTCODE identifier
+_postcode_cache = {}
+
+REQUEST_DELAY = 1.5  # seconds between requests
 
 
 def safe_filename(name):
@@ -44,42 +38,43 @@ def safe_filename(name):
     return name.replace("/", "_").replace(" ", "_").replace("\u2019", "")
 
 
-async def resolve_outcode(postcode_district):
-    """Resolve a postcode district (e.g. 'SE24') to a Rightmove OUTCODE identifier.
+async def resolve_postcode(page, postcode):
+    """Resolve a full postcode (e.g. 'W6 9LP') to a Rightmove POSTCODE identifier.
 
-    Fetches the house-prices page which embeds the OUTCODE^{id} in its HTML.
+    Fetches the house-prices page which embeds the POSTCODE^{id} in its HTML.
     """
-    if postcode_district in _outcode_cache:
-        return _outcode_cache[postcode_district]
+    if postcode in _postcode_cache:
+        return _postcode_cache[postcode]
 
-    url = f"https://www.rightmove.co.uk/house-prices/{postcode_district}.html"
+    # Rightmove URL format: "W6 9LP" → "W6-9LP"
+    slug = postcode.replace(" ", "-")
+    url = f"https://www.rightmove.co.uk/house-prices/{slug}.html"
     try:
-        result = await SCRAPFLY.async_scrape(
-            ScrapeConfig(url, raise_on_upstream_error=False, **BASE_CONFIG)
-        )
-        if result.upstream_status_code != 200:
-            print(f"    house-prices page returned {result.upstream_status_code} for {postcode_district}")
-            _outcode_cache[postcode_district] = None
+        response = await page.goto(url, wait_until="domcontentloaded")
+        if response and response.status != 200:
+            print(f"    house-prices page returned {response.status} for {postcode}")
+            _postcode_cache[postcode] = None
             return None
 
-        match = re.search(r'OUTCODE\^(\d+)', result.content)
+        content = await page.content()
+        match = re.search(r'POSTCODE\^(\d+)', content)
         if match:
-            outcode_id = f"OUTCODE^{match.group(1)}"
-            _outcode_cache[postcode_district] = outcode_id
-            return outcode_id
+            postcode_id = f"POSTCODE^{match.group(1)}"
+            _postcode_cache[postcode] = postcode_id
+            return postcode_id
     except Exception as e:
-        print(f"    Error resolving outcode for {postcode_district}: {e}")
+        print(f"    Error resolving postcode for {postcode}: {e}")
 
-    _outcode_cache[postcode_district] = None
+    _postcode_cache[postcode] = None
     return None
 
 
-async def search_properties(outcode_id, postcode, max_results=50):
-    """Search Rightmove for BUY properties near an OUTCODE location."""
+async def search_properties(page, postcode_id, postcode, max_results=50):
+    """Search Rightmove for BUY properties near a POSTCODE location."""
     params = {
         "searchLocation": postcode,
         "useLocationIdentifier": True,
-        "locationIdentifier": outcode_id,
+        "locationIdentifier": postcode_id,
         "radius": RM_RADIUS,
         "_includeSSTC": True,
         "index": 0,
@@ -97,8 +92,10 @@ async def search_properties(outcode_id, postcode, max_results=50):
         params["maxPrice"] = MAX_PRICE
 
     url = "https://www.rightmove.co.uk/api/property-search/listing/search?" + urlencode(params)
-    result = await SCRAPFLY.async_scrape(ScrapeConfig(url, **BASE_CONFIG))
-    data = json.loads(result.content)
+    await asyncio.sleep(REQUEST_DELAY)
+    response = await page.goto(url, wait_until="domcontentloaded")
+    body = await response.text()
+    data = json.loads(body)
 
     properties = data.get("properties", [])
     total = int(data.get("resultCount", "0").replace(",", ""))
@@ -109,14 +106,41 @@ async def search_properties(outcode_id, postcode, max_results=50):
         params["index"] = offset
         page_url = "https://www.rightmove.co.uk/api/property-search/listing/search?" + urlencode(params)
         try:
-            page_result = await SCRAPFLY.async_scrape(ScrapeConfig(page_url, **BASE_CONFIG))
-            page_data = json.loads(page_result.content)
+            await asyncio.sleep(REQUEST_DELAY)
+            resp = await page.goto(page_url, wait_until="domcontentloaded")
+            page_body = await resp.text()
+            page_data = json.loads(page_body)
             properties.extend(page_data.get("properties", []))
         except Exception as e:
             print(f"    Pagination error at offset {offset}: {e}")
             break
 
     return properties[:max_results]
+
+
+def rightmove_search_url(postcode_id, postcode):
+    """Build a Rightmove website search URL for the given postcode."""
+    params = {
+        "searchLocation": postcode,
+        "locationIdentifier": postcode_id,
+        "radius": RM_RADIUS,
+        "sortType": "6",
+        "propertyTypes": "",
+        "includeSSTC": "false",
+        "mustHave": "",
+        "dontShow": "",
+        "furnishTypes": "",
+        "keywords": "",
+    }
+    if MIN_BEDROOMS is not None:
+        params["minBedrooms"] = MIN_BEDROOMS
+    if MAX_BEDROOMS is not None:
+        params["maxBedrooms"] = MAX_BEDROOMS
+    if MIN_PRICE is not None:
+        params["minPrice"] = MIN_PRICE
+    if MAX_PRICE is not None:
+        params["maxPrice"] = MAX_PRICE
+    return "https://www.rightmove.co.uk/property-for-sale/find.html?" + urlencode(params)
 
 
 def slim_property(p):
@@ -131,6 +155,15 @@ def slim_property(p):
         price_display = None
 
     loc = p.get("location", {})
+
+    # Extract main thumbnail image
+    prop_images = p.get("propertyImages") or {}
+    image_url = prop_images.get("mainImageSrc")
+    if not image_url:
+        images_list = prop_images.get("images") or p.get("images") or []
+        if images_list:
+            image_url = images_list[0].get("srcUrl")
+
     return {
         "id": p.get("id"),
         "price": price,
@@ -140,40 +173,44 @@ def slim_property(p):
         "bedrooms": p.get("bedrooms"),
         "bathrooms": p.get("bathrooms"),
         "summary": p.get("summary"),
+        "image_url": image_url,
         "url": f"https://www.rightmove.co.uk/properties/{p['id']}" if p.get("id") else None,
         "latitude": loc.get("latitude") if isinstance(loc, dict) else None,
         "longitude": loc.get("longitude") if isinstance(loc, dict) else None,
     }
 
 
-async def scrape_school(school):
+async def scrape_school(page, school):
     """Search Rightmove for properties near a single school."""
     name = school["name"]
     postcode = school.get("postcode", "")
-    pc_district = school.get("postcode_district", "")
 
-    if not postcode or not pc_district:
+    if not postcode:
         print(f"  {name} — no postcode, skipping")
         return
 
     outfile = PROPERTIES_DIR / f"{safe_filename(name)}.json"
     if outfile.exists():
         existing = json.loads(outfile.read_text(encoding="utf-8"))
-        if existing:
-            print(f"  {name} — already scraped ({len(existing)} properties)")
+        # Support both old (list) and new (dict) formats
+        props = existing.get("properties", existing) if isinstance(existing, dict) else existing
+        if props:
+            print(f"  {name} — already scraped ({len(props)} properties)")
             return
 
-    print(f"  {name} ({pc_district})")
+    print(f"  {name} ({postcode})")
 
     try:
-        outcode_id = await resolve_outcode(pc_district)
-        if not outcode_id:
-            print(f"    Could not resolve OUTCODE for {pc_district}")
+        await asyncio.sleep(REQUEST_DELAY)
+        postcode_id = await resolve_postcode(page, postcode)
+        if not postcode_id:
+            print(f"    Could not resolve POSTCODE for {postcode}")
             outfile.write_text("[]", encoding="utf-8")
             return
 
-        print(f"    {outcode_id}")
-        properties = await search_properties(outcode_id, postcode, MAX_PROPERTIES_PER_SCHOOL)
+        print(f"    {postcode_id}")
+        search_url = rightmove_search_url(postcode_id, postcode)
+        properties = await search_properties(page, postcode_id, postcode, MAX_PROPERTIES_PER_SCHOOL)
 
         # Deduplicate and slim
         seen = set()
@@ -188,14 +225,18 @@ async def scrape_school(school):
             if len(slim) >= MAX_PROPERTIES_PER_SCHOOL:
                 break
 
+        output = {
+            "rightmove_url": search_url,
+            "properties": slim,
+        }
         outfile.write_text(
-            json.dumps(slim, indent=2, ensure_ascii=False), encoding="utf-8"
+            json.dumps(output, indent=2, ensure_ascii=False), encoding="utf-8"
         )
         print(f"    Saved {len(slim)} properties")
 
     except Exception as e:
         print(f"    Error: {e}")
-        outfile.write_text("[]", encoding="utf-8")
+        outfile.write_text(json.dumps({"rightmove_url": None, "properties": []}), encoding="utf-8")
 
 
 async def main():
@@ -208,14 +249,21 @@ async def main():
     if MAX_BEDROOMS is not None:
         filters.append(f"max {MAX_BEDROOMS} beds")
     if MIN_PRICE is not None:
-        filters.append(f"min \u00a3{MIN_PRICE:,}")
+        filters.append(f"min £{MIN_PRICE:,}")
     if MAX_PRICE is not None:
-        filters.append(f"max \u00a3{MAX_PRICE:,}")
+        filters.append(f"max £{MAX_PRICE:,}")
     filter_str = f" | Filters: {', '.join(filters)}" if filters else ""
     print(f"Searching Rightmove for {len(schools)} schools{filter_str}\n")
 
-    for school in schools:
-        await scrape_school(school)
+    async with async_playwright() as p:
+        browser = await p.chromium.launch(headless=True)
+        context = await browser.new_context()
+        page = await context.new_page()
+
+        for school in schools:
+            await scrape_school(page, school)
+
+        await browser.close()
 
     print(f"\nDone. Results in {PROPERTIES_DIR}/")
 

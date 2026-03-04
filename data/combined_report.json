@@ -19,10 +19,11 @@
     "neighbourhood_composite_score": 106.6,
     "neighbourhood_avg_gcse": 76.6,
     "neighbourhood_school_count": 3,
-    "property_count": 50,
-    "avg_price": 4036060,
-    "min_price": 1550000,
-    "max_price": 5000000
+    "property_count": 18,
+    "avg_price": 1815000,
+    "min_price": 950000,
+    "max_price": 3000000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=W6+9LP&locationIdentifier=POSTCODE%5E921967&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "3",
@@ -44,10 +45,11 @@
     "neighbourhood_composite_score": 97.5,
     "neighbourhood_avg_gcse": 87.5,
     "neighbourhood_school_count": 1,
-    "property_count": 50,
-    "avg_price": 2066799,
-    "min_price": 875000,
-    "max_price": 4500000
+    "property_count": 3,
+    "avg_price": 800000,
+    "min_price": 799999,
+    "max_price": 800000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=HA3+9TE&locationIdentifier=POSTCODE%5E365243&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "7",
@@ -69,10 +71,11 @@
     "neighbourhood_composite_score": 93.0,
     "neighbourhood_avg_gcse": 83.0,
     "neighbourhood_school_count": 1,
-    "property_count": 49,
-    "avg_price": 3697744,
-    "min_price": 1400000,
-    "max_price": 5000000
+    "property_count": 13,
+    "avg_price": 1516154,
+    "min_price": 1100000,
+    "max_price": 2700000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=NW5+2DB&locationIdentifier=POSTCODE%5E621461&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "8",
@@ -94,10 +97,11 @@
     "neighbourhood_composite_score": 95.9,
     "neighbourhood_avg_gcse": 75.9,
     "neighbourhood_school_count": 2,
-    "property_count": 49,
-    "avg_price": 1857439,
-    "min_price": 1000000,
-    "max_price": 4500000
+    "property_count": 12,
+    "avg_price": 1616250,
+    "min_price": 975000,
+    "max_price": 2500000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SE24+9JH&locationIdentifier=POSTCODE%5E1221290&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "9",
@@ -119,10 +123,11 @@
     "neighbourhood_composite_score": 87.1,
     "neighbourhood_avg_gcse": 77.1,
     "neighbourhood_school_count": 1,
-    "property_count": 50,
-    "avg_price": 4245760,
-    "min_price": 1175000,
-    "max_price": 4950000
+    "property_count": 30,
+    "avg_price": 2396333,
+    "min_price": 1495000,
+    "max_price": 3000000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=W14+8DW&locationIdentifier=POSTCODE%5E1621382&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "10",
@@ -144,10 +149,11 @@
     "neighbourhood_composite_score": 111.8,
     "neighbourhood_avg_gcse": 71.8,
     "neighbourhood_school_count": 4,
-    "property_count": 50,
-    "avg_price": 2328999,
-    "min_price": 1250000,
-    "max_price": 5000000
+    "property_count": 16,
+    "avg_price": 1211809,
+    "min_price": 849000,
+    "max_price": 2250000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=TW2+5LH&locationIdentifier=POSTCODE%5E1263246&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "12",
@@ -169,10 +175,11 @@
     "neighbourhood_composite_score": 86.0,
     "neighbourhood_avg_gcse": 76.0,
     "neighbourhood_school_count": 1,
-    "property_count": 50,
-    "avg_price": 3314399,
-    "min_price": 800000,
-    "max_price": 4950000
+    "property_count": 39,
+    "avg_price": 1685614,
+    "min_price": 995000,
+    "max_price": 3000000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=W3+9PP&locationIdentifier=POSTCODE%5E920033&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "13",
@@ -194,10 +201,11 @@
     "neighbourhood_composite_score": 120.4,
     "neighbourhood_avg_gcse": 70.4,
     "neighbourhood_school_count": 5,
-    "property_count": 49,
-    "avg_price": 2653367,
-    "min_price": 950000,
-    "max_price": 4950000
+    "property_count": 11,
+    "avg_price": 1094082,
+    "min_price": 800000,
+    "max_price": 1500000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=NW7+2EU&locationIdentifier=POSTCODE%5E622709&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "16",
@@ -219,10 +227,11 @@
     "neighbourhood_composite_score": 92.3,
     "neighbourhood_avg_gcse": 72.3,
     "neighbourhood_school_count": 2,
-    "property_count": 49,
-    "avg_price": 1849959,
-    "min_price": 1250000,
-    "max_price": 4000000
+    "property_count": 9,
+    "avg_price": 1727778,
+    "min_price": 950000,
+    "max_price": 3000000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=E5+8JY&locationIdentifier=POSTCODE%5E3709928&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "19",
@@ -244,10 +253,11 @@
     "neighbourhood_composite_score": 120.4,
     "neighbourhood_avg_gcse": 70.4,
     "neighbourhood_school_count": 5,
-    "property_count": 49,
-    "avg_price": 2762242,
-    "min_price": 950000,
-    "max_price": 4950000
+    "property_count": 20,
+    "avg_price": 1180000,
+    "min_price": 775000,
+    "max_price": 2250000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=N20+0DG&locationIdentifier=POSTCODE%5E1359776&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "20",
@@ -269,10 +279,11 @@
     "neighbourhood_composite_score": 83.9,
     "neighbourhood_avg_gcse": 73.9,
     "neighbourhood_school_count": 1,
-    "property_count": 49,
-    "avg_price": 3531939,
-    "min_price": 2735000,
-    "max_price": 5000000
+    "property_count": 22,
+    "avg_price": 2447955,
+    "min_price": 1100000,
+    "max_price": 3000000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SW1P+2DY&locationIdentifier=POSTCODE%5E837694&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "21",
@@ -295,9 +306,10 @@
     "neighbourhood_avg_gcse": 70.4,
     "neighbourhood_school_count": 5,
     "property_count": 49,
-    "avg_price": 2451327,
-    "min_price": 1200000,
-    "max_price": 4500000
+    "avg_price": 1332638,
+    "min_price": 765000,
+    "max_price": 2500000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=NW4+1NA&locationIdentifier=POSTCODE%5E620866&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "22",
@@ -319,10 +331,11 @@
     "neighbourhood_composite_score": 106.6,
     "neighbourhood_avg_gcse": 76.6,
     "neighbourhood_school_count": 3,
-    "property_count": 50,
-    "avg_price": 4401620,
-    "min_price": 1195000,
-    "max_price": 5000000
+    "property_count": 77,
+    "avg_price": 2106688,
+    "min_price": 1000000,
+    "max_price": 3000000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SW6+4UN&locationIdentifier=POSTCODE%5E1247553&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "24",
@@ -344,10 +357,11 @@
     "neighbourhood_composite_score": 87.8,
     "neighbourhood_avg_gcse": 67.8,
     "neighbourhood_school_count": 2,
-    "property_count": 50,
-    "avg_price": 4219620,
-    "min_price": 1295000,
-    "max_price": 5000000
+    "property_count": 42,
+    "avg_price": 1995357,
+    "min_price": 850000,
+    "max_price": 2950000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SW11+6BF&locationIdentifier=POSTCODE%5E4314657&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "29",
@@ -369,10 +383,11 @@
     "neighbourhood_composite_score": 95.9,
     "neighbourhood_avg_gcse": 75.9,
     "neighbourhood_school_count": 2,
-    "property_count": 50,
-    "avg_price": 1822200,
-    "min_price": 840000,
-    "max_price": 3000000
+    "property_count": 22,
+    "avg_price": 1528636,
+    "min_price": 750000,
+    "max_price": 2650000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SE15+5LD&locationIdentifier=POSTCODE%5E3592925&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "31",
@@ -394,10 +409,11 @@
     "neighbourhood_composite_score": 85.0,
     "neighbourhood_avg_gcse": 75.0,
     "neighbourhood_school_count": 1,
-    "property_count": 49,
-    "avg_price": 3695408,
-    "min_price": 2750000,
-    "max_price": 5000000
+    "property_count": 23,
+    "avg_price": 2218261,
+    "min_price": 1000000,
+    "max_price": 2900000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=W1U+5BA&locationIdentifier=POSTCODE%5E1268673&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "35",
@@ -419,10 +435,11 @@
     "neighbourhood_composite_score": 77.0,
     "neighbourhood_avg_gcse": 67.0,
     "neighbourhood_school_count": 1,
-    "property_count": 50,
-    "avg_price": 1947780,
-    "min_price": 775000,
-    "max_price": 3650000
+    "property_count": 15,
+    "avg_price": 1411267,
+    "min_price": 850000,
+    "max_price": 1900000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=N11+2AZ&locationIdentifier=POSTCODE%5E545575&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "39",
@@ -444,10 +461,11 @@
     "neighbourhood_composite_score": 111.8,
     "neighbourhood_avg_gcse": 71.8,
     "neighbourhood_school_count": 4,
-    "property_count": 49,
-    "avg_price": 4023878,
-    "min_price": 2000000,
-    "max_price": 5000000
+    "property_count": 9,
+    "avg_price": 1502778,
+    "min_price": 795000,
+    "max_price": 2950000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=TW10+7HN&locationIdentifier=POSTCODE%5E899875&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "40=",
@@ -472,7 +490,8 @@
     "property_count": 0,
     "avg_price": null,
     "min_price": null,
-    "max_price": null
+    "max_price": null,
+    "rightmove_url": null
   },
   {
     "rank": "43",
@@ -494,10 +513,11 @@
     "neighbourhood_composite_score": 111.8,
     "neighbourhood_avg_gcse": 71.8,
     "neighbourhood_school_count": 4,
-    "property_count": 50,
-    "avg_price": 3230700,
-    "min_price": 795000,
-    "max_price": 5000000
+    "property_count": 14,
+    "avg_price": 2096429,
+    "min_price": 1450000,
+    "max_price": 2600000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=TW1+3BB&locationIdentifier=POSTCODE%5E899446&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "49",
@@ -519,10 +539,11 @@
     "neighbourhood_composite_score": 106.6,
     "neighbourhood_avg_gcse": 76.6,
     "neighbourhood_school_count": 3,
-    "property_count": 49,
-    "avg_price": 4422163,
-    "min_price": 800000,
-    "max_price": 5000000
+    "property_count": 56,
+    "avg_price": 1810179,
+    "min_price": 750000,
+    "max_price": 3000000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SW6+1RX&locationIdentifier=POSTCODE%5E841532&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "56",
@@ -544,10 +565,11 @@
     "neighbourhood_composite_score": 86.9,
     "neighbourhood_avg_gcse": 76.9,
     "neighbourhood_school_count": 1,
-    "property_count": 22,
-    "avg_price": 1096136,
-    "min_price": 750000,
-    "max_price": 3500000
+    "property_count": 7,
+    "avg_price": 1067143,
+    "min_price": 800000,
+    "max_price": 1400000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=IG11+9AG&locationIdentifier=POSTCODE%5E1107084&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "59",
@@ -572,7 +594,8 @@
     "property_count": 0,
     "avg_price": null,
     "min_price": null,
-    "max_price": null
+    "max_price": null,
+    "rightmove_url": null
   },
   {
     "rank": "62",
@@ -597,7 +620,8 @@
     "property_count": 0,
     "avg_price": null,
     "min_price": null,
-    "max_price": null
+    "max_price": null,
+    "rightmove_url": null
   },
   {
     "rank": "71",
@@ -619,10 +643,11 @@
     "neighbourhood_composite_score": 73.0,
     "neighbourhood_avg_gcse": 63.0,
     "neighbourhood_school_count": 1,
-    "property_count": 48,
-    "avg_price": 1084996,
-    "min_price": 760000,
-    "max_price": 1850000
+    "property_count": 1,
+    "avg_price": 750000,
+    "min_price": 750000,
+    "max_price": 750000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SM3+9QB&locationIdentifier=POSTCODE%5E787509&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "75",
@@ -644,10 +669,11 @@
     "neighbourhood_composite_score": 87.8,
     "neighbourhood_avg_gcse": 67.8,
     "neighbourhood_school_count": 2,
-    "property_count": 50,
-    "avg_price": 2691700,
-    "min_price": 999999,
-    "max_price": 4950000
+    "property_count": 28,
+    "avg_price": 1043730,
+    "min_price": 750000,
+    "max_price": 1750000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SW17+9BU&locationIdentifier=POSTCODE%5E835457&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "81",
@@ -672,7 +698,8 @@
     "property_count": 0,
     "avg_price": null,
     "min_price": null,
-    "max_price": null
+    "max_price": null,
+    "rightmove_url": null
   },
   {
     "rank": "88",
@@ -694,10 +721,11 @@
     "neighbourhood_composite_score": 120.4,
     "neighbourhood_avg_gcse": 70.4,
     "neighbourhood_school_count": 5,
-    "property_count": 50,
-    "avg_price": 1903600,
-    "min_price": 835000,
-    "max_price": 3500000
+    "property_count": 24,
+    "avg_price": 990623,
+    "min_price": 750000,
+    "max_price": 1690000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=N14+5RJ&locationIdentifier=POSTCODE%5E546831&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "89=",
@@ -719,10 +747,11 @@
     "neighbourhood_composite_score": 120.4,
     "neighbourhood_avg_gcse": 70.4,
     "neighbourhood_school_count": 5,
-    "property_count": 50,
-    "avg_price": 2333500,
-    "min_price": 990000,
-    "max_price": 4500000
+    "property_count": 28,
+    "avg_price": 1548375,
+    "min_price": 775000,
+    "max_price": 2500000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=N3+1SA&locationIdentifier=POSTCODE%5E551113&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "92",
@@ -744,10 +773,11 @@
     "neighbourhood_composite_score": 71.0,
     "neighbourhood_avg_gcse": 61.0,
     "neighbourhood_school_count": 1,
-    "property_count": 50,
-    "avg_price": 3856800,
-    "min_price": 925000,
-    "max_price": 5000000
+    "property_count": 42,
+    "avg_price": 1692381,
+    "min_price": 900000,
+    "max_price": 3000000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=SW20+8HG&locationIdentifier=POSTCODE%5E1604052&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   },
   {
     "rank": "97",
@@ -769,9 +799,10 @@
     "neighbourhood_composite_score": 83.6,
     "neighbourhood_avg_gcse": 63.6,
     "neighbourhood_school_count": 2,
-    "property_count": 50,
-    "avg_price": 2583280,
-    "min_price": 895000,
-    "max_price": 4500000
+    "property_count": 8,
+    "avg_price": 1279369,
+    "min_price": 770000,
+    "max_price": 2895000,
+    "rightmove_url": "https://www.rightmove.co.uk/property-for-sale/find.html?searchLocation=HA7+3NA&locationIdentifier=POSTCODE%5E367335&radius=0.5&sortType=6&propertyTypes=&includeSSTC=false&mustHave=&dontShow=&furnishTypes=&keywords=&minBedrooms=4&minPrice=750000&maxPrice=3000000"
   }
 ]

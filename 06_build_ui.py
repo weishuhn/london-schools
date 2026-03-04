@@ -37,6 +37,7 @@ def main():
         s["neighbourhood_composite_score"] = c.get("neighbourhood_composite_score")
         s["neighbourhood_avg_gcse"] = c.get("neighbourhood_avg_gcse")
         s["neighbourhood_school_count"] = c.get("neighbourhood_school_count")
+        s["rightmove_url"] = c.get("rightmove_url")
 
     # Load properties per school
     properties_by_school = {}
@@ -45,7 +46,12 @@ def main():
         fname = safe_filename(s["name"]) + ".json"
         pfile = PROPERTIES_DIR / fname
         if pfile.exists():
-            props = load_json(pfile)
+            raw = load_json(pfile)
+            # Support both old (list) and new (dict with rightmove_url) formats
+            if isinstance(raw, dict):
+                props = raw.get("properties", [])
+            else:
+                props = raw
             properties_by_school[s["name"]] = props
             total_props += len(props)
         else:
@@ -74,20 +80,30 @@ def main():
         "Royal Borough of Kensington and Chelsea": "Kensington and Chelsea",
     }
 
-    print(f"Loaded {len(schools)} schools, {len(neighbourhoods)} neighbourhoods, {total_props} properties")
+    # Load stations
+    stations_file = DATA_DIR / "london_stations.json"
+    stations = load_json(stations_file) if stations_file.exists() else []
+
+    # Load transport lines GeoJSON
+    lines_file = DATA_DIR / "london_lines.json"
+    lines_geojson = load_json(lines_file) if lines_file.exists() else {"type": "FeatureCollection", "features": []}
+
+    print(f"Loaded {len(schools)} schools, {len(neighbourhoods)} neighbourhoods, {total_props} properties, {len(stations)} stations, {len(lines_geojson.get('features', []))} transport lines")
 
     # --- Build HTML ---
     schools_json = json.dumps(schools, ensure_ascii=False)
     neighbourhoods_json = json.dumps(neighbourhoods, ensure_ascii=False)
     properties_json = json.dumps(properties_by_school, ensure_ascii=False)
     borough_map_json = json.dumps(borough_map, ensure_ascii=False)
+    stations_json = json.dumps(stations, ensure_ascii=False)
+    lines_json = json.dumps(lines_geojson, ensure_ascii=False)
 
-    html = build_html(schools_json, neighbourhoods_json, properties_json, borough_map_json)
+    html = build_html(schools_json, neighbourhoods_json, properties_json, borough_map_json, stations_json, lines_json)
     OUTPUT.write_text(html, encoding="utf-8")
     print(f"Written to {OUTPUT} ({len(html):,} bytes)")
 
 
-def build_html(schools_json, neighbourhoods_json, properties_json, borough_map_json):
+def build_html(schools_json, neighbourhoods_json, properties_json, borough_map_json, stations_json, lines_json):
     return f"""<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -141,8 +157,10 @@ body {{ font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen,Ub
 .props-right {{ flex:1; display:flex; flex-direction:column; }}
 #props-map {{ height:40%; min-height:250px; }}
 .props-list {{ flex:1; overflow-y:auto; padding:16px; background:#0f172a; }}
-.prop-card {{ background:#1e293b; border:1px solid #334155; border-radius:8px; padding:14px; margin-bottom:12px; transition:border-color .15s; }}
+.prop-card {{ background:#1e293b; border:1px solid #334155; border-radius:8px; overflow:hidden; margin-bottom:12px; transition:border-color .15s; display:flex; }}
 .prop-card:hover {{ border-color:#38bdf8; }}
+.prop-thumb {{ width:140px; min-width:140px; height:140px; object-fit:cover; background:#0f172a; }}
+.prop-body {{ padding:14px; flex:1; min-width:0; }}
 .prop-price {{ font-size:18px; font-weight:700; color:#f1f5f9; }}
 .prop-distance {{ font-size:12px; color:#38bdf8; margin-left:8px; }}
 .prop-address {{ font-size:13px; color:#94a3b8; margin-top:4px; }}
@@ -226,8 +244,22 @@ const SCHOOLS = {schools_json};
 const NEIGHBOURHOODS = {neighbourhoods_json};
 const PROPERTIES = {properties_json};
 const BOROUGH_MAP = {borough_map_json};
+const STATIONS = {stations_json};
+const LINES = {lines_json};
+
+const MODE_COLORS = {{
+  'tube': '#000000',
+  'dlr': '#00A4A7',
+  'overground': '#EE7C0E',
+  'elizabeth-line': '#6950A1',
+  'tram': '#84B817',
+  'national-rail': '#E21836'
+}};
 
 let mainMap, propsMap, mainMarkers = {{}}, propsMarkers = [];
+let propsLineLayer = null;
+let mainTransitMarkers = [];
+let mainLineLayer = null;
 let currentSchool = null;
 
 // --- Utilities ---
@@ -400,6 +432,66 @@ function panToSchool(name) {{
     mainMap.setView(marker.getLatLng(), 14);
     marker.openPopup();
   }}
+  showMainTransit(name);
+}}
+
+function showMainTransit(name) {{
+  // Clear previous transit overlay
+  mainTransitMarkers.forEach(m => mainMap.removeLayer(m));
+  mainTransitMarkers = [];
+  if (mainLineLayer) {{ mainMap.removeLayer(mainLineLayer); mainLineLayer = null; }}
+
+  const school = SCHOOLS.find(s => s.name === name);
+  if (!school) return;
+
+  // Find nearby line IDs
+  const nearbyLineIds = new Set();
+  STATIONS.forEach(st => {{
+    const d = haversineMiles(school.lat, school.lon, st.lat, st.lon);
+    if (d <= 1.5) {{
+      (st.lines || []).forEach(lid => nearbyLineIds.add(lid));
+    }}
+  }});
+
+  // Draw lines
+  if (LINES.features && LINES.features.length > 0) {{
+    const filtered = {{
+      type: 'FeatureCollection',
+      features: LINES.features.filter(f => nearbyLineIds.has(f.properties.id))
+    }};
+    mainLineLayer = L.geoJSON(filtered, {{
+      style: function(feature) {{
+        return {{ color: feature.properties.color || '#888', weight: 3, opacity: 0.6 }};
+      }}
+    }}).addTo(mainMap);
+    mainLineLayer.bringToBack();
+  }}
+
+  // Draw station markers
+  STATIONS.forEach(st => {{
+    const d = haversineMiles(school.lat, school.lon, st.lat, st.lon);
+    if (d <= 1.5) {{
+      const modes = st.modes || [];
+      const lines = st.lines || [];
+      let markerColor = '#000';
+      if (modes.length > 0) {{
+        const primaryMode = modes[0];
+        if (primaryMode === 'tube' && lines.length > 0) {{
+          const lineFeature = LINES.features && LINES.features.find(f => f.properties.id === lines[0]);
+          markerColor = lineFeature ? lineFeature.properties.color : '#000';
+        }} else {{
+          markerColor = MODE_COLORS[primaryMode] || '#000';
+        }}
+      }}
+      const m = L.circleMarker([st.lat, st.lon], {{
+        radius: 5, fillColor: markerColor, color: '#fff', weight: 1.5, fillOpacity: 0.9
+      }}).addTo(mainMap);
+      const modeStr = modes.join(', ');
+      const lineStr = lines.join(', ');
+      m.bindPopup(`<b>${{st.name}}</b><br>Mode: ${{modeStr}}<br>Lines: ${{lineStr}}<br>${{d.toFixed(2)}} mi from school`);
+      mainTransitMarkers.push(m);
+    }}
+  }});
 }}
 
 // --- Page 2: Properties ---
@@ -473,6 +565,9 @@ function renderSchoolProperties(name) {{
   const school = SCHOOLS.find(s => s.name === name);
   if (!school) return;
 
+  // Ensure map exists
+  if (!propsMap) initPropsMap();
+
   // School detail card
   const card = document.getElementById('school-detail-card');
   card.innerHTML = `<div class="school-card">
@@ -485,6 +580,7 @@ function renderSchoolProperties(name) {{
     <div class="stat"><span class="stat-label">Type</span><span class="stat-value">${{school.type}}</span></div>
     <div class="stat"><span class="stat-label">Gender</span><span class="stat-value">${{school.gender}}</span></div>
     <div class="stat"><span class="stat-label">Properties</span><span class="stat-value">${{school.property_count || 0}}</span></div>
+    ${{school.rightmove_url ? '<a href="' + school.rightmove_url + '" target="_blank" rel="noopener" style="display:block;margin-top:8px;text-align:center;color:#38bdf8;font-size:13px;">View all on Rightmove &rarr;</a>' : ''}}
   </div>`;
 
   // Get and filter properties
@@ -515,9 +611,71 @@ function renderSchoolProperties(name) {{
     const m = L.circleMarker([p.latitude, p.longitude], {{
       radius: 6, fillColor: '#2563eb', color: '#fff', weight: 1.5, fillOpacity: 0.8
     }}).addTo(propsMap);
-    m.bindPopup(`<b>${{p.price_display}}</b><br>${{p.address.replace(/\\n/g, ', ')}}<br>${{p.bedrooms}} bed &bull; ${{p.property_type}}<br><a href="${{p.url}}" target="_blank" rel="noopener" style="color:#38bdf8;">View on Rightmove &rarr;</a>`);
+    const popupImg = p.image_url ? `<img src="${{p.image_url}}" style="width:100%;max-width:200px;border-radius:4px;margin-bottom:6px;" loading="lazy">` : '';
+    m.bindPopup(`${{popupImg}}<b>${{p.price_display}}</b><br>${{p.address.replace(/\\n/g, ', ')}}<br>${{p.bedrooms}} bed &bull; ${{p.property_type}}<br><a href="${{p.url}}" target="_blank" rel="noopener" style="color:#38bdf8;">View on Rightmove &rarr;</a>`);
     propsMarkers.push(m);
     bounds.extend([p.latitude, p.longitude]);
+  }});
+
+  // Add transport lines (filtered to lines with at least one station within 1.5mi)
+  if (propsLineLayer) {{
+    propsMap.removeLayer(propsLineLayer);
+    propsLineLayer = null;
+  }}
+  const nearbyStations = new Set();
+  const nearbyLineIds = new Set();
+  STATIONS.forEach(st => {{
+    const d = haversineMiles(school.lat, school.lon, st.lat, st.lon);
+    if (d <= 1.5) {{
+      nearbyStations.add(st.name);
+      (st.lines || []).forEach(lid => nearbyLineIds.add(lid));
+    }}
+  }});
+  if (LINES.features && LINES.features.length > 0) {{
+    const filtered = {{
+      type: 'FeatureCollection',
+      features: LINES.features.filter(f => nearbyLineIds.has(f.properties.id))
+    }};
+    propsLineLayer = L.geoJSON(filtered, {{
+      style: function(feature) {{
+        return {{
+          color: feature.properties.color || '#888',
+          weight: 3,
+          opacity: 0.6
+        }};
+      }}
+    }}).addTo(propsMap);
+    // Ensure lines render behind markers
+    propsLineLayer.bringToBack();
+  }}
+
+  // Add nearby stations (within ~1.5 miles) with mode-colored markers
+  STATIONS.forEach(st => {{
+    const d = haversineMiles(school.lat, school.lon, st.lat, st.lon);
+    if (d <= 1.5) {{
+      // Pick color: use first mode's color (prefer line color for tube)
+      const modes = st.modes || [];
+      const lines = st.lines || [];
+      let markerColor = '#000';
+      if (modes.length > 0) {{
+        const primaryMode = modes[0];
+        if (primaryMode === 'tube' && lines.length > 0) {{
+          // Use first line's color from LINES data
+          const lineFeature = LINES.features && LINES.features.find(f => f.properties.id === lines[0]);
+          markerColor = lineFeature ? lineFeature.properties.color : '#000';
+        }} else {{
+          markerColor = MODE_COLORS[primaryMode] || '#000';
+        }}
+      }}
+      const m = L.circleMarker([st.lat, st.lon], {{
+        radius: 5, fillColor: markerColor, color: '#fff', weight: 1.5, fillOpacity: 0.9
+      }}).addTo(propsMap);
+      const modeStr = modes.join(', ');
+      const lineStr = lines.join(', ');
+      m.bindPopup(`<b>${{st.name}}</b><br>Mode: ${{modeStr}}<br>Lines: ${{lineStr}}<br>${{d.toFixed(2)}} mi from school`);
+      propsMarkers.push(m);
+      bounds.extend([st.lat, st.lon]);
+    }}
   }});
 
   if (props.length > 0) {{
@@ -535,16 +693,19 @@ function renderSchoolProperties(name) {{
 
   list.innerHTML = props.map(p => `
     <div class="prop-card">
-      <span class="prop-price">${{p.price_display}}</span>
-      <span class="prop-distance">${{p.distance.toFixed(2)}} mi</span>
-      <div class="prop-address">${{p.address.replace(/\\n/g, ', ')}}</div>
-      <div class="prop-details">
-        <span>${{p.bedrooms}} bed</span>
-        <span>${{p.bathrooms}} bath</span>
-        <span>${{p.property_type}}</span>
+      ${{p.image_url ? '<img class="prop-thumb" src="' + p.image_url + '" loading="lazy" alt="">' : ''}}
+      <div class="prop-body">
+        <span class="prop-price">${{p.price_display}}</span>
+        <span class="prop-distance">${{p.distance.toFixed(2)}} mi</span>
+        <div class="prop-address">${{p.address.replace(/\\n/g, ', ')}}</div>
+        <div class="prop-details">
+          <span>${{p.bedrooms}} bed</span>
+          <span>${{p.bathrooms}} bath</span>
+          <span>${{p.property_type}}</span>
+        </div>
+        ${{p.summary ? '<div class="prop-summary">' + p.summary.slice(0, 150) + (p.summary.length > 150 ? '...' : '') + '</div>' : ''}}
+        <a class="prop-link" href="${{p.url}}" target="_blank" rel="noopener">View on Rightmove &rarr;</a>
       </div>
-      ${{p.summary ? '<div class="prop-summary">' + p.summary.slice(0, 150) + (p.summary.length > 150 ? '...' : '') + '</div>' : ''}}
-      <a class="prop-link" href="${{p.url}}" target="_blank" rel="noopener">View on Rightmove &rarr;</a>
     </div>
   `).join('');
   list.scrollTop = 0;

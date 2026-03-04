@@ -18,12 +18,22 @@ def load_property_summary(school_name):
     safe_name = school_name.replace("/", "_").replace(" ", "_").replace("'", "")
     filepath = PROPERTIES_DIR / f"{safe_name}.json"
 
-    if not filepath.exists():
-        return {"property_count": 0, "avg_price": None, "min_price": None, "max_price": None}
+    empty = {"property_count": 0, "avg_price": None, "min_price": None, "max_price": None, "rightmove_url": None}
 
-    properties = json.loads(filepath.read_text(encoding="utf-8"))
+    if not filepath.exists():
+        return empty
+
+    raw = json.loads(filepath.read_text(encoding="utf-8"))
+    # Support both old (list) and new (dict with rightmove_url) formats
+    if isinstance(raw, dict):
+        properties = raw.get("properties", [])
+        rightmove_url = raw.get("rightmove_url")
+    else:
+        properties = raw
+        rightmove_url = None
+
     if not properties:
-        return {"property_count": 0, "avg_price": None, "min_price": None, "max_price": None}
+        return {**empty, "rightmove_url": rightmove_url}
 
     prices = []
     for p in properties:
@@ -43,6 +53,7 @@ def load_property_summary(school_name):
         "avg_price": round(sum(prices) / len(prices)) if prices else None,
         "min_price": min(prices) if prices else None,
         "max_price": max(prices) if prices else None,
+        "rightmove_url": rightmove_url,
     }
 
 

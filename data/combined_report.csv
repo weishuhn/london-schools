@@ -1,0 +1,32 @@
+rank,name,location,lat,lon,borough,postcode,postcode_district,type,gcse_pct_7_9,gcse_rank,alevel_pct_a_star_b,ib_avg_points,value_added,value_added_rank,gender,neighbourhood_composite_score,neighbourhood_avg_gcse,neighbourhood_school_count,property_count,avg_price,min_price,max_price
+2,West London Free School,London,51.4927928,-0.2379492,London Borough of Hammersmith and Fulham,W6 9LP,W6,Partially selective (9%),87.4,17,61.1,21.0,63.1,98,Boys Girls,106.6,76.6,3,50,4036060,1550000,5000000
+3,JFS,Harrow,51.5816691,-0.281682,London Borough of Brent,HA3 9TE,HA3,Comprehensive,87.5,15=,58.6,26.4,54.0,139=,Boys Girls,97.5,87.5,1,50,2066799,875000,4500000
+7,Camden School for Girls,London,51.5455937,-0.1344416,London Borough of Camden,NW5 2DB,NW5,Partially selective (7%),83.0,44=,53.0,19.0,50.0,159=,Girls Sixth form,93.0,83.0,1,49,3697744,1400000,5000000
+8,The Charter School North Dulwich,London,51.4564238,-0.0888642,London Borough of Southwark,SE24 9JH,SE24,Comprehensive,78.0,78=,45.0,,54.0,139=,Boys Girls,95.9,75.9,2,49,1857439,1000000,4500000
+9,The Cardinal Vaughan Memorial School,London,51.5045683,-0.2114489,Royal Borough of Kensington and Chelsea,W14 8DW,W14,Comprehensive,77.1,86,45.7,15.6,55.5,132=,Boys Sixth form,87.1,77.1,1,50,4245760,1175000,4950000
+10,"Waldegrave School, Twickenham",London,51.4395559,-0.3523925,London Borough of Richmond upon Thames,TW2 5LH,TW2,Comprehensive,78.0,78=,42.0,11.0,53.0,144,Girls Sixth form,111.8,71.8,4,50,2328999,1250000,5000000
+12,Twyford CofE High School,London,51.5091305,-0.2782908,London Borough of Ealing,W3 9PP,W3,Partially selective (10%),76.0,93=,49.0,,55.0,136,Boys Girls,86.0,76.0,1,50,3314399,800000,4950000
+13,Hasmonean High School for Girls,London,51.6038631,-0.2337784,London Borough of Barnet,NW7 2EU,NW7,Comprehensive,73.3,122,47.0,15.2,60.3,109,Girls,120.4,70.4,5,49,2653367,950000,4950000
+16,Mossbourne Community Academy,London,51.5514482,-0.0620587,London Borough of Hackney,E5 8JY,E5,Comprehensive,77.6,84,51.0,19.9,49.8,161=,Boys Girls,92.3,72.3,2,49,1849959,1250000,4000000
+19,JCoss (Jewish Community Secondary School),London,51.6256002,-0.1584543,London Borough of Barnet,N20 0DG,N20,Comprehensive,78.0,78=,46.8,17.0,47.8,174=,Boys Girls,120.4,70.4,5,49,2762242,950000,4950000
+20,The Grey Coat Hospital,London,51.4958987,-0.1340777,Millbank,SW1P 2DY,SW1P,Partially selective (10%),73.9,114,42.4,15.4,54.1,138,Girls Sixth form,83.9,73.9,1,49,3531939,2735000,5000000
+21,Hasmonean High School for Boys,London,51.5964699,-0.21443,London Borough of Barnet,NW4 1NA,NW4,Comprehensive,76.7,89=,52.0,24.3,47.5,176=,Boys,120.4,70.4,5,49,2451327,1200000,4500000
+22,Lady Margaret School,London,51.4742809,-0.199095,London Borough of Hammersmith and Fulham,SW6 4UN,SW6,Comprehensive,70.3,150=,40.1,9.9,60.0,110,Girls,106.6,76.6,3,50,4401620,1195000,5000000
+24,Ark Bolingbroke Academy,London,51.4561701,-0.168334,London Borough of Wandsworth,SW11 6BF,SW11,Comprehensive,75.3,101,42.6,14.7,49.0,165,Boys Girls,87.8,67.8,2,50,4219620,1295000,5000000
+29,St Thomas the Apostle School and Sixth Form College,London,51.47469,-0.0747,London Borough of Southwark,SE15 5LD,SE15,Comprehensive,73.8,115,43.1,14.0,48.7,166,Boys Sixth form,95.9,75.9,2,50,1822200,840000,3000000
+31,The St Marylebone CofE School,London,51.5221193,-0.1520651,Marylebone,W1U 5BA,W1U,Partially selective (10%),75.0,105=,41.8,12.7,44.9,197=,Girls Sixth form,85.0,75.0,1,49,3695408,2750000,5000000
+35,Alexandra Park School,London,51.6021426,-0.136145,London Borough of Haringey,N11 2AZ,N11,Comprehensive,67.0,185=,35.0,,57.0,124,Boys Girls,77.0,67.0,1,50,1947780,775000,3650000
+39,Grey Court School,London,51.4381886,-0.3113117,London Borough of Richmond upon Thames,TW10 7HN,TW10,Comprehensive,69.0,159=,38.0,,50.0,159=,Boys Girls,111.8,71.8,4,49,4023878,2000000,5000000
+40=,Christ’s School,London,51.4590931,-0.2879997,London Borough of Richmond upon Thames,TW10 6HW,TW10,Comprehensive,72.7,126=,45.5,9.6,42.4,210,Boys Girls,111.8,71.8,4,0,,,
+43,Orleans Park,London,51.4494917,-0.3203131,London Borough of Richmond upon Thames,TW1 3BB,TW1,Comprehensive,67.4,182=,35.1,10.4,52.0,151=,Boys Girls,111.8,71.8,4,50,3230700,795000,5000000
+49,The London Oratory School,London,51.4821513,-0.194136,London Borough of Hammersmith and Fulham,SW6 1RX,SW6,Comprehensive,72.0,134=,40.0,,41.0,222=,Boys Sixth form,106.6,76.6,3,49,4422163,800000,5000000
+56,Barking Abbey School,Barking,51.5436705,0.1034983,Barking,IG11 9AG,IG11,Comprehensive,76.9,87,38.6,9.5,26.8,354=,Boys Girls,86.9,76.9,1,22,1096136,750000,3500000
+59,St Gregory’s RC Science College,Harrow,51.5833,-0.3155,London Borough of Harrow,HA3 0NR,HA3,Comprehensive,68.6,166,27.4,5.1,42.2,212,Boys Girls,83.6,63.6,2,0,,,
+62,Clapton Girls’ Academy,London,51.5540273,-0.0520476,London Borough of Hackney,E5 0RB,E5,Comprehensive,67.0,185=,36.0,,44.0,203,Girls,92.3,72.3,2,0,,,
+71,"Glenthorne High School, Sutton",London,51.3799261,-0.2018502,London Borough of Sutton,SM3 9QB,SM3,Partially selective (10%),63.0,241=,30.0,10.0,48.0,171=,Boys Girls,73.0,63.0,1,48,1084996,760000,1850000
+75,Graveney School,London,51.4238878,-0.1511743,London Borough of Wandsworth,SW17 9BU,SW17,Partially selective (25%),60.4,282=,32.4,8.8,51.8,155,Boys Girls,87.8,67.8,2,50,2691700,999999,4950000
+81,The Coopers’ Company and Coborn School,Upminster,51.5579,0.2528,London Borough of Havering,RM14 2YN,RM14,Partially selective (10%),68.0,169=,30.1,7.8,34.0,283=,Boys Girls,78.0,68.0,1,0,,,
+88,Ashmole Academy,London,51.6291866,-0.1328884,London Borough of Barnet,N14 5RJ,N14,Partially selective (8%),64.0,230=,31.3,9.2,38.7,237=,Boys Girls,120.4,70.4,5,50,1903600,835000,3500000
+89=,Finchley RC High School,London,51.599013,-0.1975833,London Borough of Barnet,N3 1SA,N3,Comprehensive,60.0,287=,,,46.0,192,Boys Sixth form,120.4,70.4,5,50,2333500,990000,4500000
+92,"Ursuline High School, Wimbledon",London,51.4164212,-0.2222241,London Borough of Merton,SW20 8HG,SW20,Comprehensive,61.0,272=,,,43.0,205=,Girls,71.0,61.0,1,50,3856800,925000,5000000
+97,Avanti House Secondary School,London,51.61725,-0.33237,London Borough of Harrow,HA7 3NA,HA7,Comprehensive,58.6,304,32.6,13.1,46.7,185=,Boys Girls,83.6,63.6,2,50,2583280,895000,4500000

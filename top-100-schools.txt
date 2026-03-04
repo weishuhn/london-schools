@@ -1,0 +1,202 @@
+
+
+1
+	Dame Alice Owen’s School 	Potters Bar 	Partially selective (37.5%) 	30.7 	66.1 	89.1 	13 	72.1 	54 	Boys Girls
+2
+	West London Free School 	London 	Partially selective (9%) 	21 	61.1 	87.4 	17 	63.1 	98 	Boys Girls
+3
+	JFS 	Harrow 	Comprehensive 	26.4 	58.6 	87.5 	15= 	54 	139= 	Boys Girls
+4
+	Tauheedul Islam Girls’ High School and Sixth Form College 	Blackburn 	Comprehensive 	11.7 	47 	78.3 	74 	66.3 	84= 	Girls
+5
+	Yavneh College 	Borehamwood 	Comprehensive 	14 	51 	82 	48= 	56 	128 	Boys Girls
+6
+	St Andrew’s RC School, Leatherhead 	Leatherhead 	Comprehensive 	18.2 	47.2 	82.4 	46 	52.5 	148 	Boys Girls
+7
+	Camden School for Girls 	London 	Partially selective (7%) 	19 	53 	83 	44= 	50 	159= 	Girls Sixth form
+8
+	The Charter School North Dulwich 	London 	Comprehensive 	- 	45 	78 	78= 	54 	139= 	Boys Girls
+9
+	The Cardinal Vaughan Memorial School 	London 	Comprehensive 	15.6 	45.7 	77.1 	86 	55.5 	132= 	Boys Sixth form
+10
+	Waldegrave School, Twickenham 	London 	Comprehensive 	11 	42 	78 	78= 	53 	144 	Girls Sixth form
+11
+	Cheadle Hulme High School 	Stockport 	Comprehensive 	16.6 	47.9 	80.2 	60= 	46.9 	183= 	Boys Girls
+12
+	Twyford CofE High School 	London 	Partially selective (10%) 	- 	49 	76 	93= 	55 	136 	Boys Girls
+13
+	Hasmonean High School for Girls 	London 	Comprehensive 	15.2 	47 	73.3 	122 	60.3 	109 	Girls
+14
+	Sandringham School 	St Albans 	Comprehensive 	15.4 	43.8 	73.6 	118= 	58.4 	117 	Boys Girls
+15
+	St Clement Danes School 	Rickmansworth 	Partially selective (20%) 	15.3 	44.1 	79.2 	67= 	47.2 	181 	Boys Girls
+16
+	Mossbourne Community Academy 	London 	Comprehensive 	19.9 	51 	77.6 	84 	49.8 	161= 	Boys Girls
+17
+	Hockerill Anglo-European College 	Bishop’s Stortford 	Partially selective (10%) 	18.8 	47.8 	78.2 	75= 	47.5 	176= 	Boys Girls
+18
+	St George’s School, Harpenden 	Harpenden 	Comprehensive 	18.2 	51.6 	76.7 	89= 	50.3 	158 	Boys Girls
+19
+	JCoss (Jewish Community Secondary School) 	London 	Comprehensive 	17 	46.8 	78 	78= 	47.8 	174= 	Boys Girls
+20
+	The Grey Coat Hospital 	London 	Partially selective (10%) 	15.4 	42.4 	73.9 	114 	54.1 	138 	Girls Sixth form
+21
+	Hasmonean High School for Boys 	London 	Comprehensive 	24.3 	52 	76.7 	89= 	47.5 	176= 	Boys
+22
+	Lady Margaret School 	London 	Comprehensive 	9.9 	40.1 	70.3 	150= 	60 	110 	Girls
+23
+	Sir John Lawes School 	Harpenden 	Comprehensive 	16.4 	44 	75.5 	98 	49.1 	164 	Boys Girls
+24
+	Ark Bolingbroke Academy 	London 	Comprehensive 	14.7 	42.6 	75.3 	101 	49 	165 	Boys Girls
+25=
+	Salesian School 	Chertsey 	Comprehensive 	- 	42 	75 	105= 	48 	171= 	Boys Girls
+25=
+	Tapton School 	Sheffield 	Comprehensive 	10.1 	34.8 	66.5 	194= 	65 	95 	Boys Girls
+27
+	Parmiter’s School 	Watford 	Partially selective (35%) 	12.2 	37.5 	71 	140= 	55.4 	134= 	Boys Girls
+28
+	The Holt School 	Wokingham 	Comprehensive 	13.9 	46.7 	74.2 	112 	48.3 	168 	Girls Sixth form
+29
+	St Thomas the Apostle School and Sixth Form College 	London 	Comprehensive 	14 	43.1 	73.8 	115 	48.7 	166 	Boys Sixth form
+30
+	Cowbridge School 	Cowbridge 	Comprehensive 	21.4 	45.9 	74.5 	110= 	47.1 	182 	Boys Girls
+31
+	The St Marylebone CofE School 	London 	Partially selective (10%) 	12.7 	41.8 	75 	105= 	44.9 	197= 	Girls Sixth form
+32
+	Impington Village College 	Impington 	Comprehensive 	14.9 	47.8 	74.5 	110= 	45.1 	196 	Boys Girls
+33
+	Rosebery School 	Epsom 	Comprehensive 	11.5 	37.6 	70.7 	142= 	52 	151= 	Girls
+34
+	Watford Grammar School for Girls 	Watford 	Partially selective (35%) 	10.4 	39.6 	66.6 	193 	58.2 	118= 	Girls
+35
+	Alexandra Park School 	London 	Comprehensive 	- 	35 	67 	185= 	57 	124 	Boys Girls
+36
+	St Peter’s RC School, Guildford 	Guildford 	Comprehensive 	22.1 	48.5 	72.1 	133 	46.2 	190 	Boys Girls
+37
+	Gordon’s School, Woking 	Woking 	Comprehensive 	15 	40.7 	70.1 	153= 	49.8 	161= 	Boys Girls
+38
+	The West Bridgford School 	Nottingham 	Comprehensive 	20 	46.5 	70.7 	142= 	48.2 	169= 	Boys Girls
+39
+	Grey Court School 	London 	Comprehensive 	- 	38 	69 	159= 	50 	159= 	Boys Girls
+40=
+	Christ’s School 	London 	Comprehensive 	9.6 	45.5 	72.7 	126= 	42.4 	210 	Boys Girls
+40=
+	St John the Baptist School, Woking 	Woking 	Comprehensive 	13.3 	38.6 	73.6 	118= 	40.7 	226 	Boys Girls
+42
+	The Hertfordshire and Essex High School and Science College 	Bishop’s Stortford 	Partially selective (10%) 	12.5 	36.6 	70.7 	142= 	45.9 	193 	Girls Sixth form
+43
+	Orleans Park 	London 	Comprehensive 	10.4 	35.1 	67.4 	182= 	52 	151= 	Boys Girls
+44
+	St Mary’s College, Hull 	Hull 	Comprehensive 	9.9 	34.3 	75.4 	99= 	35.7 	265 	Boys Girls
+45=
+	Ralph Allen School 	Bath 	Partially selective (2%) 	13.8 	33.7 	65.1 	212= 	55.7 	130 	Boys Girls
+45=
+	St Paul’s School for Girls, Edgbaston 	Birmingham 	Comprehensive 	- 	44 	72 	134= 	42 	213 	Girls
+47
+	Roundwood Park School 	Harpenden 	Comprehensive 	13.6 	36.4 	69 	159= 	47.8 	174= 	Boys Girls
+48
+	Bohunt School 	Liphook 	Comprehensive 	8.3 	46.7 	76.8 	88 	31.6 	310= 	Boys Girls
+49
+	The London Oratory School 	London 	Comprehensive 	- 	40 	72 	134= 	41 	222= 	Boys Sixth form
+50
+	The King’s (The Cathedral) School, Peterborough 	Peterborough 	Partially selective (10%) 	10.1 	37.9 	69.4 	156 	45.7 	194 	Boys Girls
+51
+	Didsbury High School 	Manchester 	Comprehensive 	3.2 	28.7 	57.4 	313= 	69.1 	68 	Boys Girls
+52
+	Hazel Grove High School 	Stockport 	Comprehensive 	13.6 	47.6 	74.1 	113 	34.8 	275= 	Boys Girls
+53
+	The Cotswold School 	Bourton-on-the-Water 	Comprehensive 	13.1 	43.2 	75.8 	96 	31.5 	312= 	Boys Girls
+54
+	Fulford School 	York 	Comprehensive 	14.5 	40.4 	75.2 	102 	32.2 	301 	Boys Girls
+55
+	Bartholomew School 	Witney 	Comprehensive 	14 	36 	69.2 	157 	43.4 	204 	Boys Girls
+56
+	Barking Abbey School 	Barking 	Comprehensive 	9.5 	38.6 	76.9 	87 	26.8 	354= 	Boys Girls
+57
+	Horsforth School 	Leeds 	Comprehensive 	14.9 	39.3 	70.6 	148 	38.9 	236 	Boys Girls
+58
+	Archbishop Holgate’s School 	York 	Comprehensive 	13.9 	41.8 	70.7 	142= 	38.5 	239= 	Boys Girls
+59
+	St Gregory’s RC Science College 	Harrow 	Comprehensive 	5.1 	27.4 	68.6 	166 	42.2 	212 	Boys Girls
+60
+	Hinchley Wood School 	Esher 	Comprehensive 	11.3 	33.9 	63.4 	240 	52.1 	150 	Boys Girls
+61
+	Saffron Walden County High School 	Saffron Walden 	Comprehensive 	13.5 	33.5 	67.7 	177= 	42.8 	207 	Boys Girls
+62
+	Clapton Girls’ Academy 	London 	Comprehensive 	- 	36 	67 	185= 	44 	203 	Girls
+63
+	Didcot Girls’ School 	Didcot 	Comprehensive 	15.4 	39.6 	67.9 	171= 	41.7 	216 	Girls Sixth form
+64
+	Tauheedul Islam Boys’ High School 	Blackburn 	Comprehensive 	8 	31 	67.8 	173= 	41.6 	217 	Boys
+65
+	St Paul’s RC College, Sunbury-on-Thames 	Sunbury-on-Thames 	Comprehensive 	10.6 	31.8 	65.8 	204 	45.6 	195 	Boys Girls
+66
+	Balcarras School 	Cheltenham 	Comprehensive 	9.9 	35.4 	69 	159= 	38.2 	244= 	Boys Girls
+67
+	The King David High School, Manchester 	Manchester 	Comprehensive 	22.7 	44.2 	68.2 	168 	38.5 	239= 	Boys Girls
+68
+	St Albans Girls’ School 	St Albans 	Comprehensive 	9.1 	34.9 	66.8 	190= 	41.1 	219= 	Girls Sixth form
+69
+	Howard of Effingham School 	Leatherhead 	Comprehensive 	8.8 	34.9 	67.8 	173= 	38.7 	237= 	Boys Girls
+70
+	Beaumont School 	St Albans 	Comprehensive 	13.4 	36.9 	66.2 	198= 	41.8 	215 	Boys Girls
+71
+	Glenthorne High School, Sutton 	London 	Partially selective (10%) 	10 	30 	63 	241= 	48 	171= 	Boys Girls
+72
+	The Cherwell School 	Oxford 	Comprehensive 	16.5 	40.1 	65.7 	205 	41.9 	214 	Boys Girls
+73
+	The Piggott School 	Reading 	Comprehensive 	- 	32 	65 	214= 	43 	205= 	Boys Girls
+74
+	Heathside School 	Weybridge 	Comprehensive 	12.3 	40.7 	68.9 	162 	35 	271= 	Boys Girls
+75
+	Graveney School 	London 	Partially selective (25%) 	8.8 	32.4 	60.4 	282= 	51.8 	155 	Boys Girls
+76
+	High Storrs School 	Sheffield 	Comprehensive 	12.5 	34 	62.9 	245 	46.6 	188 	Boys Girls
+77
+	St Leonard’s RC School 	Durham 	Comprehensive 	14 	34.7 	62.8 	246 	46.5 	189 	Boys Girls
+78
+	Arden Academy 	Solihull 	Comprehensive 	9.2 	34.9 	67.4 	182= 	37.2 	252= 	Boys Girls
+79
+	Durham Johnston Comprehensive School 	Durham 	Comprehensive 	13.9 	38.6 	68.8 	163= 	33.6 	290 	Boys Girls
+80
+	St Mary’s RC High School, Chesterfield 	Chesterfield 	Comprehensive 	12.2 	35.4 	64.3 	225 	42.5 	208= 	Boys Girls
+81
+	The Coopers’ Company and Coborn School 	Upminster 	Partially selective (10%) 	7.8 	30.1 	68 	169= 	34 	283= 	Boys Girls
+82
+	North Leamington School 	Leamington Spa 	Comprehensive 	- 	- 	65 	214= 	40 	230 	Boys Girls
+83
+	Wellington School 	Altrincham 	Comprehensive 	7 	22.6 	66.9 	189 	35.3 	267= 	Boys Girls
+84
+	Bristol Free School 	Bristol 	Comprehensive 	15 	37.5 	64.1 	227= 	40.8 	225 	Boys Girls
+85
+	Northampton School for Boys 	Northampton 	Partially selective (10%) 	14.9 	37 	67.7 	177= 	33.1 	295 	Boys Sixth form
+86
+	Cockermouth School 	Cockermouth 	Comprehensive 	18.4 	42.2 	69.1 	158 	29.7 	332 	Boys Girls
+87
+	Kenilworth School 	Kenilworth 	Comprehensive 	9.9 	34.7 	64.4 	223= 	38.1 	246 	Boys Girls
+88
+	Ashmole Academy 	London 	Partially selective (8%) 	9.2 	31.3 	64 	230= 	38.7 	237= 	Boys Girls
+89=
+	Bristol Cathedral Choir School 	Bristol 	Partially selective (15%) 	9.3 	32.2 	63.7 	238= 	38.5 	239= 	Boys Girls
+89=
+	Finchley RC High School 	London 	Comprehensive 	- 	- 	60 	287= 	46 	192 	Boys Sixth form
+91
+	Silverdale School 	Sheffield 	Comprehensive 	14.7 	38.5 	64.9 	218= 	35.3 	267= 	Boys Girls
+92
+	Ursuline High School, Wimbledon 	London 	Comprehensive 	- 	- 	61 	272= 	43 	205= 	Girls
+93
+	Beechen Cliff School 	Bath 	Partially selective (7%) 	10.2 	29.2 	65.1 	212= 	34.7 	277 	Boys Sixth form
+94=
+	Beauchamps High School 	Wickford 	Comprehensive 	- 	- 	66.2 	198= 	32.3 	299= 	Boys Girls
+94=
+	Emmanuel College, Tyne and Wear 	Gateshead 	Partially selective (10%) 	8.7 	32 	62.1 	250= 	40.4 	227 	Boys Girls
+96
+	All Saints RC School, York 	York 	Comprehensive 	10.4 	35.7 	66.8 	190= 	30.7 	321= 	Boys Girls
+97
+	Avanti House Secondary School 	London 	Comprehensive 	13.1 	32.6 	58.6 	304 	46.7 	185= 	Boys Girls
+98
+	The Ecclesbourne School 	Belper 	Comprehensive 	11.3 	35.8 	64.2 	226 	34.9 	274 	Boys Girls
+99
+	Holyport College 	Holyport 	Comprehensive 	- 	- 	64 	230= 	35 	271= 	Boys Girls
+100
+	Sherburn High School 	Leeds 	Comprehensive 	8.7 	38.8 	66 	200= 	30.7 	321= 	Boys Girls

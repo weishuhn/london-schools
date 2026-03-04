@@ -1,0 +1,378 @@
+[
+  {
+    "borough": "London Borough of Barnet",
+    "postcode_districts": [
+      "N14",
+      "N20",
+      "N3",
+      "NW4",
+      "NW7"
+    ],
+    "school_count": 5,
+    "schools": [
+      "Hasmonean High School for Girls",
+      "JCoss (Jewish Community Secondary School)",
+      "Hasmonean High School for Boys",
+      "Ashmole Academy",
+      "Finchley RC High School"
+    ],
+    "avg_gcse_pct_7_9": 70.4,
+    "avg_alevel_pct_a_star_b": 44.3,
+    "school_types": [
+      "Comprehensive",
+      "Partially selective (8%)"
+    ],
+    "gender_mix": [
+      "Boys",
+      "Boys Girls",
+      "Boys Sixth form",
+      "Girls"
+    ],
+    "composite_score": 120.4
+  },
+  {
+    "borough": "London Borough of Richmond upon Thames",
+    "postcode_districts": [
+      "TW1",
+      "TW10",
+      "TW2"
+    ],
+    "school_count": 4,
+    "schools": [
+      "Waldegrave School, Twickenham",
+      "Grey Court School",
+      "Christ’s School",
+      "Orleans Park"
+    ],
+    "avg_gcse_pct_7_9": 71.8,
+    "avg_alevel_pct_a_star_b": 40.1,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Boys Girls",
+      "Girls Sixth form"
+    ],
+    "composite_score": 111.8
+  },
+  {
+    "borough": "London Borough of Hammersmith and Fulham",
+    "postcode_districts": [
+      "SW6",
+      "W6"
+    ],
+    "school_count": 3,
+    "schools": [
+      "West London Free School",
+      "Lady Margaret School",
+      "The London Oratory School"
+    ],
+    "avg_gcse_pct_7_9": 76.6,
+    "avg_alevel_pct_a_star_b": 47.1,
+    "school_types": [
+      "Comprehensive",
+      "Partially selective (9%)"
+    ],
+    "gender_mix": [
+      "Boys Girls",
+      "Boys Sixth form",
+      "Girls"
+    ],
+    "composite_score": 106.6
+  },
+  {
+    "borough": "London Borough of Brent",
+    "postcode_districts": [
+      "HA3"
+    ],
+    "school_count": 1,
+    "schools": [
+      "JFS"
+    ],
+    "avg_gcse_pct_7_9": 87.5,
+    "avg_alevel_pct_a_star_b": 58.6,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Boys Girls"
+    ],
+    "composite_score": 97.5
+  },
+  {
+    "borough": "London Borough of Southwark",
+    "postcode_districts": [
+      "SE15",
+      "SE24"
+    ],
+    "school_count": 2,
+    "schools": [
+      "The Charter School North Dulwich",
+      "St Thomas the Apostle School and Sixth Form College"
+    ],
+    "avg_gcse_pct_7_9": 75.9,
+    "avg_alevel_pct_a_star_b": 44.0,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Boys Girls",
+      "Boys Sixth form"
+    ],
+    "composite_score": 95.9
+  },
+  {
+    "borough": "London Borough of Camden",
+    "postcode_districts": [
+      "NW5"
+    ],
+    "school_count": 1,
+    "schools": [
+      "Camden School for Girls"
+    ],
+    "avg_gcse_pct_7_9": 83.0,
+    "avg_alevel_pct_a_star_b": 53.0,
+    "school_types": [
+      "Partially selective (7%)"
+    ],
+    "gender_mix": [
+      "Girls Sixth form"
+    ],
+    "composite_score": 93.0
+  },
+  {
+    "borough": "London Borough of Hackney",
+    "postcode_districts": [
+      "E5"
+    ],
+    "school_count": 2,
+    "schools": [
+      "Mossbourne Community Academy",
+      "Clapton Girls’ Academy"
+    ],
+    "avg_gcse_pct_7_9": 72.3,
+    "avg_alevel_pct_a_star_b": 43.5,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Boys Girls",
+      "Girls"
+    ],
+    "composite_score": 92.3
+  },
+  {
+    "borough": "London Borough of Wandsworth",
+    "postcode_districts": [
+      "SW11",
+      "SW17"
+    ],
+    "school_count": 2,
+    "schools": [
+      "Ark Bolingbroke Academy",
+      "Graveney School"
+    ],
+    "avg_gcse_pct_7_9": 67.8,
+    "avg_alevel_pct_a_star_b": 37.5,
+    "school_types": [
+      "Comprehensive",
+      "Partially selective (25%)"
+    ],
+    "gender_mix": [
+      "Boys Girls"
+    ],
+    "composite_score": 87.8
+  },
+  {
+    "borough": "Royal Borough of Kensington and Chelsea",
+    "postcode_districts": [
+      "W14"
+    ],
+    "school_count": 1,
+    "schools": [
+      "The Cardinal Vaughan Memorial School"
+    ],
+    "avg_gcse_pct_7_9": 77.1,
+    "avg_alevel_pct_a_star_b": 45.7,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Boys Sixth form"
+    ],
+    "composite_score": 87.1
+  },
+  {
+    "borough": "Barking",
+    "postcode_districts": [
+      "IG11"
+    ],
+    "school_count": 1,
+    "schools": [
+      "Barking Abbey School"
+    ],
+    "avg_gcse_pct_7_9": 76.9,
+    "avg_alevel_pct_a_star_b": 38.6,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Boys Girls"
+    ],
+    "composite_score": 86.9
+  },
+  {
+    "borough": "London Borough of Ealing",
+    "postcode_districts": [
+      "W3"
+    ],
+    "school_count": 1,
+    "schools": [
+      "Twyford CofE High School"
+    ],
+    "avg_gcse_pct_7_9": 76.0,
+    "avg_alevel_pct_a_star_b": 49.0,
+    "school_types": [
+      "Partially selective (10%)"
+    ],
+    "gender_mix": [
+      "Boys Girls"
+    ],
+    "composite_score": 86.0
+  },
+  {
+    "borough": "Marylebone",
+    "postcode_districts": [
+      "W1U"
+    ],
+    "school_count": 1,
+    "schools": [
+      "The St Marylebone CofE School"
+    ],
+    "avg_gcse_pct_7_9": 75.0,
+    "avg_alevel_pct_a_star_b": 41.8,
+    "school_types": [
+      "Partially selective (10%)"
+    ],
+    "gender_mix": [
+      "Girls Sixth form"
+    ],
+    "composite_score": 85.0
+  },
+  {
+    "borough": "Millbank",
+    "postcode_districts": [
+      "SW1P"
+    ],
+    "school_count": 1,
+    "schools": [
+      "The Grey Coat Hospital"
+    ],
+    "avg_gcse_pct_7_9": 73.9,
+    "avg_alevel_pct_a_star_b": 42.4,
+    "school_types": [
+      "Partially selective (10%)"
+    ],
+    "gender_mix": [
+      "Girls Sixth form"
+    ],
+    "composite_score": 83.9
+  },
+  {
+    "borough": "London Borough of Harrow",
+    "postcode_districts": [
+      "HA3",
+      "HA7"
+    ],
+    "school_count": 2,
+    "schools": [
+      "St Gregory’s RC Science College",
+      "Avanti House Secondary School"
+    ],
+    "avg_gcse_pct_7_9": 63.6,
+    "avg_alevel_pct_a_star_b": 30.0,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Boys Girls"
+    ],
+    "composite_score": 83.6
+  },
+  {
+    "borough": "London Borough of Havering",
+    "postcode_districts": [
+      "RM14"
+    ],
+    "school_count": 1,
+    "schools": [
+      "The Coopers’ Company and Coborn School"
+    ],
+    "avg_gcse_pct_7_9": 68.0,
+    "avg_alevel_pct_a_star_b": 30.1,
+    "school_types": [
+      "Partially selective (10%)"
+    ],
+    "gender_mix": [
+      "Boys Girls"
+    ],
+    "composite_score": 78.0
+  },
+  {
+    "borough": "London Borough of Haringey",
+    "postcode_districts": [
+      "N11"
+    ],
+    "school_count": 1,
+    "schools": [
+      "Alexandra Park School"
+    ],
+    "avg_gcse_pct_7_9": 67.0,
+    "avg_alevel_pct_a_star_b": 35.0,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Boys Girls"
+    ],
+    "composite_score": 77.0
+  },
+  {
+    "borough": "London Borough of Sutton",
+    "postcode_districts": [
+      "SM3"
+    ],
+    "school_count": 1,
+    "schools": [
+      "Glenthorne High School, Sutton"
+    ],
+    "avg_gcse_pct_7_9": 63.0,
+    "avg_alevel_pct_a_star_b": 30.0,
+    "school_types": [
+      "Partially selective (10%)"
+    ],
+    "gender_mix": [
+      "Boys Girls"
+    ],
+    "composite_score": 73.0
+  },
+  {
+    "borough": "London Borough of Merton",
+    "postcode_districts": [
+      "SW20"
+    ],
+    "school_count": 1,
+    "schools": [
+      "Ursuline High School, Wimbledon"
+    ],
+    "avg_gcse_pct_7_9": 61.0,
+    "avg_alevel_pct_a_star_b": 0,
+    "school_types": [
+      "Comprehensive"
+    ],
+    "gender_mix": [
+      "Girls"
+    ],
+    "composite_score": 71.0
+  }
+]

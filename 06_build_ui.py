@@ -262,6 +262,13 @@ const BOROUGH_MAP = {borough_map_json};
 const STATIONS = {stations_json};
 const LINES = {lines_json};
 
+const UNIVERSITIES = [
+  {{ name: 'Imperial College London', lat: 51.4988, lon: -0.1749, desc: 'World-leading science & engineering university' }},
+  {{ name: 'UCL', lat: 51.5246, lon: -0.1340, desc: 'London\\'s largest multidisciplinary university' }},
+  {{ name: 'LSE', lat: 51.5144, lon: -0.1165, desc: 'World-renowned social sciences university' }},
+  {{ name: "King's College London", lat: 51.5115, lon: -0.1160, desc: 'Historic research university in central London' }}
+];
+
 const RM_CONFIG = {{ radius:'0.5', minBedrooms:4, minPrice:750000, maxPrice:3000000, maxResults:96 }};
 const propertiesCache = {{}};
 
@@ -513,6 +520,19 @@ function initMainMap() {{
       ${{propCount > 0 ? '<a href="#" onclick="switchToProperties(\\'' + s.name.replace(/'/g, "\\\\'") + '\\');return false;" style="color:#38bdf8;font-size:12px;">View Properties &rarr;</a>' : ''}}
     `);
     mainMarkers[s.name] = marker;
+  }});
+
+  // University markers
+  UNIVERSITIES.forEach(u => {{
+    const m = L.marker([u.lat, u.lon], {{
+      icon: L.divIcon({{
+        className: '',
+        html: '<div style="background:#7c3aed;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3);">&#x1F393;</div>',
+        iconSize: [24, 24],
+        iconAnchor: [12, 12]
+      }})
+    }}).addTo(mainMap);
+    m.bindPopup(`<div class="popup-title">${{u.name}}</div><div class="popup-stat">${{u.desc}}</div>`);
   }});
 
   // Load borough outlines
@@ -837,6 +857,24 @@ async function renderSchoolProperties(name) {{
       m.bindPopup(`<b>${{st.name}}</b><br>Mode: ${{modeStr}}<br>Lines: ${{lineStr}}<br>${{d.toFixed(2)}} mi from school`);
       propsMarkers.push(m);
       bounds.extend([st.lat, st.lon]);
+    }}
+  }});
+
+  // Nearby university markers (within 3 miles)
+  UNIVERSITIES.forEach(u => {{
+    const d = haversineMiles(school.lat, school.lon, u.lat, u.lon);
+    if (d <= 3) {{
+      const m = L.marker([u.lat, u.lon], {{
+        icon: L.divIcon({{
+          className: '',
+          html: '<div style="background:#7c3aed;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;border:2px solid #fff;box-shadow:0 2px 4px rgba(0,0,0,.3);">&#x1F393;</div>',
+          iconSize: [24, 24],
+          iconAnchor: [12, 12]
+        }})
+      }}).addTo(propsMap);
+      m.bindPopup(`<b>${{u.name}}</b><br>${{u.desc}}<br>${{d.toFixed(2)}} mi from school`);
+      propsMarkers.push(m);
+      bounds.extend([u.lat, u.lon]);
     }}
   }});
 
